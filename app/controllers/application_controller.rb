@@ -1,4 +1,5 @@
 class ApplicationController < Sinatra::Base
+  
   set :default_content_type, 'application/json'
 
   get '/games' do
@@ -14,6 +15,13 @@ class ApplicationController < Sinatra::Base
         user: { only: [:name] }
       } }
     })
+  end
+
+
+  delete '/reviews/:id' do
+    review = Review.find(params[:id])
+    review.destroy
+    review.to_json
   end
 
 end
